@@ -7,6 +7,7 @@
 #define LED_PIN 4
 
 #define LED_COUNT 16
+#define IMAGE_SLICES 64
 
 unsigned long prevTime = 0;
 bool endedContact = true;
@@ -34,7 +35,7 @@ void loop()
 
     if(DidFullCircle(timeElapsed))
     {
-        unsigned long columnDelayMicros = timeElapsed / 64;
+        unsigned long columnDelayMicros = timeElapsed / IMAGE_SLICES;
         long actualDelay = (long)columnDelayMicros - 550;
         if(actualDelay < 0)
             actualDelay = 0;

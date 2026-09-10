@@ -1,8 +1,31 @@
+import sys
+import os
 from PIL import Image
 
-image = Image.open("image.png").convert("RGB")
+if len(sys.argv) < 2:
+    print("Missing image path")
+    input("Press Enter to exit")
+    sys.exit(1)
+
+image_path = sys.argv[1]
+
+if not os.path.isfile(image_path):
+    print("File does not exist")
+    input("Press Enter to exit")
+    sys.exit(1)
+
+image = Image.open(image_path).convert("RGB")
 pixels = image.load()
 width, height = image.size
+
+if height != 16:
+    print("Image height must be 16 pixels")
+    input("Press Enter to exit")
+    sys.exit(1)
+elif width > 64:
+    print("Image width must not exceed 64 pixels")
+    input("Press Enter to exit")
+    sys.exit(1)
 
 pixelArray = [[pixels[x, y] for x in range(width)] for y in range(height)]
 
