@@ -1,4 +1,5 @@
 <h1 align="center">HoloC</h1>
+<p align="center"><img src="assets/holoc.png" width="300"/></p>
 <p align="center">HoloC - a simple holographic display project.</p>
 
 ---
