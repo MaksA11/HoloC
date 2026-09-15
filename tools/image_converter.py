@@ -14,7 +14,7 @@ if not os.path.isfile(image_path):
     input("Press Enter to exit")
     sys.exit(1)
 
-image = Image.open(image_path).convert("RGB")
+image = Image.open(image_path).convert("RGBA")
 pixels = image.load()
 width, height = image.size
 
@@ -27,7 +27,20 @@ elif width > 64:
     input("Press Enter to exit")
     sys.exit(1)
 
-pixelArray = [[pixels[x, y] for x in range(width)] for y in range(height)]
+pixelArray = []
+
+for y in range(height):
+    row = []
+
+    for x in range(width):
+        r, g, b, a = pixels[x, y]
+        alphaFactor = a / 255.0
+        adjR = round(r * alphaFactor)
+        adjG = round(g * alphaFactor)
+        adjB = round(b * alphaFactor)
+        row.append((adjR, adjG, adjB))
+
+    pixelArray.append(row)
 
 arrayString = f"#define COLUMN_COUNT {width}\n\n"
 arrayString += f"Color pixels[{height}][{width}] = {{\n"
